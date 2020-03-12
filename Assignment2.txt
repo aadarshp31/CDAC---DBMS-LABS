@@ -1,0 +1,96 @@
+Show databases;
+Create database db1;
+Show databases;
+use db1;
+show tables;
+
+create table institution(
+Institute_ID VARCHAR(8) NOT NULL,
+Institute_Name CHAR(70) NOT NULL,
+City CHAR(50) NOT NULL
+);
+
+create table course(
+Course_ID VARCHAR(4) NOT NULL,
+Teacher_ID VARCHAR(4) NOT NULL,
+Institute_ID VARCHAR(8) NOT NULL,
+Course_Name CHAR(10),
+Duration FLOAT(2,2)
+);
+
+create table student(
+Student_ID VARCHAR(8),
+Course_ID VARCHAR(4) not null,
+Institute_ID VARCHAR(4) NOT NULL,
+Name CHAR(70),
+DOB date,
+Age int(3),
+PRIMARY KEY (Student_ID)
+);
+
+create table teacher(
+Teacher_ID VARCHAR(4),
+Course_ID VARCHAR(4),
+Institute_ID VARCHAR(8),
+Name CHAR(70),
+Experience FLOAT(2,2),
+primary key ()
+);
+
+//Updating values
+alter table course add constraint Course_ID primary key (Course_ID);
+alter table institution add constraint Institute_ID primary key (Institute_ID);
+alter table teacher add constraint Teacher_ID primary key (Teacher_ID);
+
+
+//Inserting data into tables
+INSERT INTO institution(Institute_ID,Institute_Name,City) values('I0001','COLLEGE1','MUMBAI');
+INSERT INTO institution(Institute_ID,Institute_Name,City) values('I0002','COLLEGE2','PUNE');
+INSERT INTO institution(Institute_ID,Institute_Name,City) values('I0003','COLLEGE3','BANGALORE');
+
+//show values in table
+select * from institution;
+
+//Deleting rows from table
+DELETE FROM institution WHERE Institute_ID = 'I0001';
+
+//Truncate rows
+
+TRUNCATE table institution;
+
+
+//FOREIGN KEY ADDITION
+
+//Course Table
+ALTER TABLE course ADD FOREIGN KEY(Teacher_ID) references teacher(Teacher_ID);
+ALTER TABLE course ADD FOREIGN KEY(Institute_ID) references institution(Institute_ID);
+
+//Student Table
+ALTER TABLE student ADD FOREIGN KEY(Course_ID) references course(Course_ID); 
+Alter TABLE student ADD FOREIGN KEY(Institute_ID) references institution(Institute_ID);
+
+//Teacher Table
+ALTER TABLE teacher ADD FOREIGN KEY(Course_ID) references course(Course_ID);
+ALTER TABLE teacher ADD FOREIGN KEY(Institute_ID) references institution(Institute_ID);
+
+//INSERTING DATA
+
+//Course Table
+INSERT INTO course values('C001','T001','I001', 'Mechanical',4);
+
+
+//CREATING NEW USER
+create user adi@localhost identified by 'aaa';
+
+//trying to access database
+
+GRANT select ON db1. *TO adi@localhost;
+
+
+
+
+
+
+
+
+
