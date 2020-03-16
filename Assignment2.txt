@@ -86,11 +86,17 @@ create user adi@localhost identified by 'aaa';
 
 GRANT select ON db1. *TO adi@localhost;
 
+//Altering data type of course duration
+
+alter table course modify column duration int(2);
 
 
+//to remove foreign key from column
+show create table teacher;
 
+alter table teacher drop foreign key teacher_ibfk_1;
 
+insert into teacher values('T001','I001','adarsh', 0);
 
-
-
-
+//Adding values to course
+insert into course values('C001', 'T0001', 'I0001', 'ME', 4);

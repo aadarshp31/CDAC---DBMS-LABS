@@ -1,0 +1,107 @@
+//Assignment 3 / Day3
+
+
+create table all_students(
+Student_ID VARCHAR(8),
+First_Name CHAR(70),
+Last_Name CHAR(70),
+Age int(3),
+Department varchar(20),
+Gender ENUM('M', 'F', 'Others'),
+Score int(4),
+Paid_Fee int(5),
+PRIMARY KEY (Student_ID)
+);
+
+INSERT INTO all_students values('S0001','Adarsh', 'Pandey', 22, 'DAC', 'M', 60, 5000);
+INSERT INTO all_students values('S0002','Aditya', 'Chougule', 21, 'DAC', 'M', 70, 8000);
+INSERT INTO all_students values('S0003','Sreenivas', 'A', 18, 'ITSS', 'M', 90, 2000);
+INSERT INTO all_students values('S0004','Aarti', 'Mishra', 28, 'ITSS', 'F', 87, 4000);
+INSERT INTO all_students values('S0005','Elli', 'Pathak', 22, 'DAC', 'F', 67, 3500);
+INSERT INTO all_students values('S0006','Bhakti', 'Selot', 25, 'ITSS', 'F', 77, 4000);
+INSERT INTO all_students values('S0007','Amruta', 'Khan', 21, 'DAC', 'F', 97, 1000);
+
+//Show all records
+select * from all_students;
+
+//Show few columns
+select student_id, first_name, department, paid_fee, score from all_students;
+
+//Show column with user frindly name
+select student_id as ID, first_name as FName, paid_fee, score as Marks from all_students;
+
+//Show few records acc to condition
+select * from all_students where score > 70;
+
+//Logics
+select * from all_students where score = 70 or score = 90;
+select * from all_students where score > 70 and score<90;
+select * from all_students where department IN('DAC');
+
+//IN
+select * from all_students where department IN('DAC');
+select * from all_students where department NOT IN('DAC');
+
+//Group By
+select Department, count(department) as Count from all_students group by department;
+
+//Wildcard 
+select * from all_students where First_NAme like 'B%';
+
+select * from all_students where First_NAme like '%i';
+
+select * from all_students where First_NAme like '%l%';
+
+
+select * from all_students where First_NAme like '_____';
+
+
+//Sorting data
+
+select max(age) from all_students;
+select * from all_students order by age;
+select * from all_students order by age desc;
+
+//subqueries
+
+select first_name, score from all_students where score = (select max(score) from all_students);
+
+
+create table hostel(
+Room_No varchar(20),
+Student_ID VARCHAR(8),
+First_Name CHAR(70),
+Last_Name CHAR(70),
+Gender ENUM('M', 'F', 'Others'),
+hostel_Fee int(5),
+PRIMARY KEY (Room_No),
+FOREIGN KEY (Student_ID)
+references all_students(Student_ID)
+);
+
+//Inserting values into hostel table
+
+INSERT INTO hostel values('R001','S0001','Adarsh', 'Pandey','M', 5000);
+INSERT INTO hostel values('R0002','S0002','Aditya', 'Chougule','M',2000);
+INSERT INTO hostel values('R0003','S0003','Sreenivas','N','M',2000);
+INSERT INTO hostel values('R0004','S0004','Aarti', 'Mishra','F',4000);
+
+update hostel set room_no='R0001'where student_id='s0001';
+
+//Union,
+select * from all_students UNION select * from hostel;
+
+select First_name from all_students UNION select First_name from hostel;
+//intersection
+select First_name from all_students where First_name IN(select First_name from hostel);
+
+//minus
+select First_name from all_students where First_name not IN(select First_name from hostel);
+
+//getting data from two tables
+
+
+
+
+
+

@@ -1,0 +1,32 @@
+1) For all records  - *
+2) few columns 
+3) columns with user friendly names (only for display)
+4) few records - WHERE
+5) OR
+6) AND
+7) IN
+8) GROUP BY
+9) Use of wild card charactors % , _
+10) Getting data from more than one table ( two, three, etc) 
+11) sorting the data  asc, desc
+12) limiting the records
+13) subqueries
+14) Join - normal, perfect , LEFT, RIGHT
+15) Union, union all, intersection, minus
+16) Views
+
+
+
+
+
+
+select employeename , deptname from employee JOIN department ON employee.deptid=department.deptid;
+
+
+select employeename , deptname from employee LEFT JOIN department ON employee.deptid=department.deptid;
+
+select employeename , deptname from employee RIGHT JOIN department ON employee.deptid=department.deptid;
+
+
+
+
